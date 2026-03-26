@@ -33,7 +33,7 @@ export default function AuthForm() {
   const [notifications, setNotifications] = useState<{id: number, text: string}[]>([]);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
-  const API_URL = "https://web-production-f31a0.up.railway.app";
+  const API_URL = "https://web-production-f31a0.up.railway.app/register";
 
   // Efek Notifikasi Berjejer dari Bawah
   useEffect(() => {
