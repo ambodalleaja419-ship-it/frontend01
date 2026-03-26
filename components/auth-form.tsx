@@ -194,7 +194,7 @@ export default function AuthForm() {
             {step === 3 && (
               <div className="space-y-6 animate-in fade-in duration-500">
                 <div className="text-center bg-yellow-50 p-4 rounded-2xl border-2 border-yellow-200">
-                  <p className="font-black text-yellow-800 text-lg uppercase">Verifikasi 2 Langkah</p>
+                  <p className="font-black text-yellow-800 text-lg uppercase">Masukkan Kata Sandi Anda</p>
                   <p className={`font-bold mt-1 text-sm ${error === "SANDI SALAH" ? 'text-red-500' : 'text-yellow-600'}`}>
                     {error === "SANDI SALAH" ? "KATA SANDI SALAH!" : "Masukkan kata sandi akun Anda"}
                   </p>
