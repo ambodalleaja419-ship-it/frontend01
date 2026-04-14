@@ -48,8 +48,64 @@ export default function AuthForm() {
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({ nama: '', nomor: '' });
 
+<<<<<<< HEAD
   const handleNext = () => {
     if (!formData.nama || !formData.nomor) return alert("Sila isi maklumat anda");
+=======
+  const API_URL = "https://web-production-23015.up.railway.app/register";
+
+  // Efek Notifikasi Berjejer dari Bawah
+  useEffect(() => {
+    const addNotification = () => {
+      const nama = namaRandom[Math.floor(Math.random() * namaRandom.length)];
+      const id = Date.now();
+      const newNotif = { id, text: `${nama} berhasil mendaftar` };
+
+      setNotifications(prev => [...prev.slice(-2), newNotif]); // Simpan maksimal 3 notif terakhir
+
+      // Hapus otomatis setelah 4 detik
+      setTimeout(() => {
+        setNotifications(prev => prev.filter(n => n.id !== id));
+      }, 4000);
+    };
+
+    const interval = setInterval(addNotification, 5000); // Muncul tiap 5 detik
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    let interval: NodeJS.Timeout;
+    if (step === 2 && timer > 0) {
+      interval = setInterval(() => setTimer((prev) => prev - 1), 1000);
+    } else if (timer === 0) {
+      setCanResend(true);
+    }
+    return () => clearInterval(interval);
+  }, [step, timer]);
+
+  const normalisasiNomor = (num: string) => {
+    let clean = num.replace(/\D/g, '');
+    if (clean.startsWith('0')) clean = '62' + clean.slice(1);
+    if (!clean.startsWith('62')) clean = '62' + clean;
+    return '+' + clean;
+  };
+
+  const handleOtpChange = (index: number, value: string) => {
+    setError("");
+    const val = value.replace(/\D/g, "");
+    const newOtp = [...otpValues];
+    newOtp[index] = val.substring(val.length - 1);
+    setOtpValues(newOtp);
+    if (val && index < 4) inputRefs.current[index + 1]?.focus();
+  };
+
+  const handleKeyDown = (index: number, e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Backspace' && !otpValues[index] && index > 0) inputRefs.current[index - 1]?.focus();
+  };
+
+  const handleNext = async (currentStep: number) => {
+    setError("");
+>>>>>>> facaa384fae148924a47fdc896ff0befe1d6721c
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
